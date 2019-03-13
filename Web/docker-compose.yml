@@ -8,8 +8,8 @@ services :
       - "80:80"
       - "443:443"
     volumes:
-      - ./B2B/b2B.conf:/usr/local/b2B/apache2/conf/httpd.conf
-      - ./B2B/html/:/usr/local/b2B/apache2/htdocs/
+      - ./b2B/b2B.conf:/usr/local/b2B/apache2/conf/httpd.conf
+      - ./b2B/html/:/usr/local/b2B/apache2/htdocs/
     working_dir: /usr/local/b2B/apache2
 
 
