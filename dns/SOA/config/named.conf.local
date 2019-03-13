@@ -8,7 +8,7 @@ view internal {
     allow-recursion { internals; };
     zone "wt1.ephec-ti.be" {
         type master;
-        file "/etc/bind/db.internal.wt1.ephec-ti.be";
+        file "/etc/bind/db.internal.wt15.ephec-ti.be";
     };
 };
 
@@ -16,6 +16,6 @@ view external {
     match-clients { any; };
     zone "wt1.ephec-ti.be" {
         type master;
-        file "/etc/bind/db.wt1.ephec-ti.be";
+        file "/etc/bind/db.wt15.ephec-ti.be";
     };
 };
