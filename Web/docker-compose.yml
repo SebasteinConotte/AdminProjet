@@ -1,0 +1,38 @@
+version : '3'
+
+services :
+  web:
+    image: httpd:2.6
+    container_name: b2B
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./B2B/b2B.conf:/usr/local/b2B/apache2/conf/httpd.conf
+      - ./B2B/html/:/usr/local/b2B/apache2/htdocs/
+    working_dir: /usr/local/b2B/apache2
+
+
+   web:
+    image: httpd:2.6
+    container_name: vitrine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./vitrine/vitrine.conf:/usr/local/vitrine/apache2/conf/httpd.conf
+      - ./vitrine/html/:/usr/local/vitrine/apache2/htdocs/
+    working_dir: /usr/local/vitrine/apache2
+
+
+   
+   web:
+    image: httpd:2.6
+    container_name: intranet
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./intranet/intranet.conf:/usr/local/intranet/apache2/conf/httpd.conf
+      - ./intranet/html/:/usr/local/intranet/apache2/htdocs/
+    working_dir: /usr/local/intranet/apache2
