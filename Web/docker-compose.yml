@@ -15,14 +15,14 @@ services :
 
    web:
     image: httpd:2.6
-    container_name: vitrine
+    container_name: showcase
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./vitrine/vitrine.conf:/usr/local/vitrine/apache2/conf/httpd.conf
-      - ./vitrine/html/:/usr/local/vitrine/apache2/htdocs/
-    working_dir: /usr/local/vitrine/apache2
+      - ./showcase/showcase.conf:/usr/local/showcase/apache2/conf/httpd.conf
+      - ./showcase/html/:/usr/local/showcase/apache2/htdocs/
+    working_dir: /usr/local/showcase/apache2
 
 
    
