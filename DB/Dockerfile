@@ -2,7 +2,8 @@ FROM ubuntu:16.04
 
 
 # Install MySQL 5.6
-RUN apt install mysql-server && \
+RUN apt-get install -y \
+    mysql-server && \
     service mysql stop && \
     sed -e 's/^datadir\t.*$/datadir = \/data/' -i /etc/mysql/my.cnf && \
     sed -e 's/^bind-address\t.*$/bind-address = 0.0.0.0/' -i /etc/mysql/my.cnf && \
