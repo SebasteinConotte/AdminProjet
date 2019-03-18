@@ -8,7 +8,7 @@ fi
 
 # Initialize first run
 if [[ -e /.firstrun ]]; then
-    /scripts/first_run.sh
+    /script/create_database.sh
 fi
 
 # Start MySQL
