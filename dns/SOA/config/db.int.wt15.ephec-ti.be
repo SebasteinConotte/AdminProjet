@@ -1,1 +1,1 @@
-$include "/etc/bind/external/db.wt15.ephec-ti.be"
+$include "/etc/bind/db.wt15.ephec-ti.be"
