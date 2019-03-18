@@ -15,7 +15,7 @@ echo "Creating user: \"$USER\"..."
 # Create dabatase
 if [ ! -z "$DB" ]; then
     echo "Creating database: \"$DB\"..."
-    mysql --password=$PASS < /tmp/db_schema.sql
+    mysql --password=$PASS < /script/db_schema.sql
 fi
 
 # Stop MySQL service
