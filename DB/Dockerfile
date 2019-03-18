@@ -12,12 +12,12 @@ RUN DEBIAN_FRONTEND=noninteractive \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add scripts
-ADD scripts /scripts
-RUN chmod +x /scripts/*.sh
+ADD script /script
+RUN chmod +x /script/*.sh
 RUN touch /.firstrun
 
 # Command to run
-ENTRYPOINT ["/scripts/run.sh"]
+ENTRYPOINT ["/script/run.sh"]
 CMD [""]
 
 # Expose listen port
