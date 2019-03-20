@@ -1,6 +1,6 @@
-$ORIGIN wt15.ephec-ti.be.
+$ORIGIN w15.ephec-ti.be.
 $TTL	43200
-@	IN	SOA	ns.wt15.ephec-ti.be. admin.wt15.ephec-ti.be. (
+@	IN	SOA	ns.w15.ephec-ti.be. admin.w15.ephec-ti.be. (
 		 	2018050401	; Serial
 			 43200		; Refresh
 			  7200		; Retry
@@ -8,7 +8,7 @@ $TTL	43200
 			  43200 )	; Negative Cache TTL
 ;
 ; name servers - NS record
-@				IN	NS			ns.wt15.ephec-ti.be.
+@				IN	NS			ns.w15.ephec-ti.be.
 
 
 
