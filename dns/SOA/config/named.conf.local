@@ -1,21 +1,21 @@
 acl internals {
-  #add internal networks
+  127.0.0.1
 };
 
 view internal {
     match-clients { internals; };
     recursion yes;
     allow-recursion { internals; };
-    zone "wt15.ephec-ti.be" {
+    zone "w15.ephec-ti.be" {
         type master;
-        file "/etc/bind/db.int.wt15.ephec-ti.be";
+        file "/etc/bind/db.int.w15.ephec-ti.be";
     };
 };
 
 view external {
     match-clients { any; };
-    zone "wt15.ephec-ti.be" {
+    zone "w15.ephec-ti.be" {
         type master;
-        file "/etc/bind/db.wt15.ephec-ti.be";
+        file "/etc/bind/db.w15.ephec-ti.be";
     };
 };
