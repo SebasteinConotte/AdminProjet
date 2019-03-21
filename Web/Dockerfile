@@ -22,7 +22,7 @@ RUN a2enmod php7.0
 RUN a2enmod rewrite
 
 
-
+RUN service apache2 restart
 
 #activer sites
 #RUN ln -s /etc/apache2/site-available/b2B.conf  /etc/apache2/sites-enabled/
