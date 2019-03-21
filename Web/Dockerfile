@@ -5,14 +5,14 @@ apache2 php7.0 php7.0-mysql libapache2-mod-php7.0 curl lynx-cur
 
 
 #copy des config des sites 
-#COPY b2B/b2B.conf /etc/apache2/site-available/b2B.conf
-#COPY intranet/intranet.conf /etc/apache2/site-available/intranet.conf
-#COPY showcase/showcase.conf /etc/apache2/site-available/showcase.conf
+ADD b2B/b2B.conf /etc/apache2/site-available/b2B.conf
+ADD intranet/intranet.conf /etc/apache2/site-available/intranet.conf
+ADD showcase/showcase.conf /etc/apache2/site-available/showcase.conf
 
 #copy des sites 
-#COPY b2B/html /var/www/b2b/html
-COPY intranet/html /var/www/intranet/html
-COPY showcase/html /var/www/default/html
+ADD b2B/html /var/www/b2b/html
+ADD intranet/html /var/www/intranet/html
+ADD showcase/html /var/www/default/html
 
 
 
