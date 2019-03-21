@@ -28,7 +28,7 @@ RUN service apache2 restart
 #RUN ln -s /etc/apache2/site-available/b2B.conf  /etc/apache2/sites-enabled/
 #RUN ln -s /etc/apache2/site-available/intranet.conf  /etc/apache2/sites-enabled/
 #RUN ln -s /etc/apache2/site-available/showcase.conf  /etc/apache2/sites-enabled/
-RUN a2ensite b2b.w15.ephec-ti.be.conf
+RUN a2ensite b2b.w15.ephec-ti.be
 
 
 EXPOSE 80 443
