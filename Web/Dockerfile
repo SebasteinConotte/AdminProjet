@@ -5,9 +5,9 @@ apache2 php7.0 php7.0-mysql libapache2-mod-php7.0 curl lynx-cur
 
 
 #copy des config des sites 
-COPY b2B/b2B.conf /etc/apache2/site-available/b2b.w15.ephec-ti.be.conf
-COPY intranet/intranet.conf /etc/apache2/site-available/intranet.w15.ephec-ti.be.conf
-COPY showcase/showcase.conf /etc/apache2/site-available/showcase.conf
+COPY b2B/b2b.w15.ephec-ti.be.conf /etc/apache2/site-available/b2b.w15.ephec-ti.be.conf
+COPY intranet/intranet.w15.ephec-ti.be.conf /etc/apache2/site-available/intranet.w15.ephec-ti.be.conf
+COPY showcase/w15.ephec-ti.be.conf /etc/apache2/site-available/w15.ephec-ti.be.conf
 
 #copy des sites 
 COPY b2B/html /var/www/b2b/html
@@ -22,12 +22,13 @@ RUN a2enmod php7.0
 RUN a2enmod rewrite
 
 
-RUN service apache2 restart
+
 
 #activer sites
-RUN ln -s /etc/apache2/site-available/b2B.conf  /etc/apache2/sites-enabled/
-RUN ln -s /etc/apache2/site-available/intranet.conf  /etc/apache2/sites-enabled/
-RUN ln -s /etc/apache2/site-available/showcase.conf  /etc/apache2/sites-enabled/
+#RUN ln -s /etc/apache2/site-available/b2B.conf  /etc/apache2/sites-enabled/
+#RUN ln -s /etc/apache2/site-available/intranet.conf  /etc/apache2/sites-enabled/
+#RUN ln -s /etc/apache2/site-available/showcase.conf  /etc/apache2/sites-enabled/
+RUN a2ensite b2b.w15.ephec-ti.be.conf
 
 
 EXPOSE 80 443
