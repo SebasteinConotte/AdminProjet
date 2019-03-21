@@ -25,10 +25,10 @@ RUN a2enmod rewrite
 RUN service apache2 restart
 
 #activer sites
-#RUN ln -s /etc/apache2/site-available/b2B.conf  /etc/apache2/sites-enabled/
-#RUN ln -s /etc/apache2/site-available/intranet.conf  /etc/apache2/sites-enabled/
-#RUN ln -s /etc/apache2/site-available/showcase.conf  /etc/apache2/sites-enabled/
-RUN a2ensite b2b.w15.ephec-ti.be
+RUN ln -s /etc/apache2/site-available/b2b.w15.ephec-ti.be.conf  /etc/apache2/sites-enabled/
+RUN ln -s /etc/apache2/site-available/intranet.w15.ephec-ti.be.conf /etc/apache2/sites-enabled/
+RUN ln -s /etc/apache2/site-available/w15.ephec-ti.be.conf /etc/apache2/sites-enabled/
+
 
 
 EXPOSE 80 443
