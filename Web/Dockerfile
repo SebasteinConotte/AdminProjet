@@ -5,7 +5,7 @@ apache2 php7.0 php7.0-mysql libapache2-mod-php7.0 curl lynx-cur
 
 
 #copy des config des sites 
-COPY b2B/b2B.conf /etc/apache2/site-available/b2B.conf
+#COPY b2B/b2B.conf /etc/apache2/site-available/b2B.conf
 COPY intranet/intranet.conf /etc/apache2/site-available/intranet.conf
 COPY showcase/showcase.conf /etc/apache2/site-available/showcase.conf
 
