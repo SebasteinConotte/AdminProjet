@@ -10,9 +10,9 @@ apache2 php7.0 php7.0-mysql libapache2-mod-php7.0 curl lynx-cur
 #COPY showcase/showcase.conf /etc/apache2/site-available/showcase.conf
 
 #copy des sites 
-#COPY b2B/html /var/www/b2b/html
-#COPY intranet/html /var/www/intranet/html
-#COPY showcase/html /var/www/default/html
+COPY b2B/html /var/www/b2b/html
+COPY intranet/html /var/www/intranet/html
+COPY showcase/html /var/www/default/html
 
 
 
@@ -26,6 +26,7 @@ RUN a2ensite b2B.conf
 RUN a2ensite intranet.conf
 RUN a2ensite showcase.conf
 
+RUN service apache2 restart
 
 EXPOSE 80 443
 
