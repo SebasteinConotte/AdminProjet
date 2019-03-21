@@ -25,9 +25,9 @@ RUN a2enmod rewrite
 RUN service apache2 restart
 
 #activer sites
-RUN a2ensite b2B.conf
-RUN a2ensite intranet.conf
-RUN a2ensite showcase.conf
+RUN ln -s /etc/apache2/site-available/b2B.conf  /etc/apache2/sites-enabled/
+RUN ln -s /etc/apache2/site-available/intranet.conf  /etc/apache2/sites-enabled/
+RUN ln -s /etc/apache2/site-available/showcase.conf  /etc/apache2/sites-enabled/
 
 
 EXPOSE 80 443
