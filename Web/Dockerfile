@@ -21,12 +21,14 @@ COPY showcase/html /var/www/default/html
 RUN a2enmod php7.0
 RUN a2enmod rewrite
 
-#activer sites
-RUN a2ensite /etc/apache2/site-available/b2B
-RUN a2ensite /etc/apache2/site-available/intranet
-RUN a2ensite /etc/apache2/site-available/showcase
 
 RUN service apache2 restart
+
+#activer sites
+RUN a2ensite b2B.conf
+RUN a2ensite intranet.conf
+RUN a2ensite showcase.conf
+
 
 EXPOSE 80 443
 
