@@ -22,9 +22,9 @@ RUN a2enmod php7.0
 RUN a2enmod rewrite
 
 #activer sites
-RUN a2ensite /etc/apache2/site-available/b2B.conf
-RUN a2ensite /etc/apache2/site-available/intranet.conf
-RUN a2ensite /etc/apache2/site-available/showcase.conf
+RUN a2ensite b2B
+RUN a2ensite intranet
+RUN a2ensite showcase
 
 RUN service apache2 restart
 
