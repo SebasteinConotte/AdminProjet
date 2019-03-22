@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 RUN apt-get update && apt-get -y upgrade && DEBIAN_FRONTEND=noninteractive apt-get -y install \
-apache2 php7.0 php7.0-mysql libapache2-mod-php7.0 curl lynx-cur
+apt-utils apache2 php7.0 php7.0-mysql libapache2-mod-php7.0 curl lynx-cur
 
 
 #copy des config des sites 
