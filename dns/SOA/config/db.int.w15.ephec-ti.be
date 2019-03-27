@@ -1,3 +1,3 @@
-$include "/etc/bind/db.wt15.ephec-ti.be"
+$include "/etc/bind/db.w15.ephec-ti.be"
 
 intranet			IN	CNAME		serverWeb
