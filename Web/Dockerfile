@@ -33,5 +33,5 @@ RUN ln -s /etc/apache2/site-available/w15.ephec-ti.be.conf /etc/apache2/sites-en
 
 EXPOSE 80 443
 
-CMD [“/usr/sbin/httpd”, “-D”, “FOREGROUND”]
+CMD ["apachectl", "-D", "FOREGROUND"]
 
