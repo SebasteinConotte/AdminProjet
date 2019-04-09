@@ -12,7 +12,7 @@ while ($donnees = $reponse->fetch()) {
 ?>
 <html>
 <head>
-    <title>Nom et tél des membres</title>
+    <title>Nom et numéro de téléphone des membres</title>
 </head>
 <body>
 <form action="action.php" method="post">
