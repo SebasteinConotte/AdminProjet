@@ -5,7 +5,7 @@ RUN apt-get update && \
     libnewt-dev libxml2-dev linux-headers-$(uname -r) uuid-dev \
     libsqlite3-dev libjansson-dev && \
     wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-15-current.tar.gz && \
-    tar -xzvf asterisk-15-current.tar.gz && 
+    tar -xzvf asterisk-15-current.tar.gz &&  \
     cd asterisk-15.*/  && \
     ./contrib/scripts/get_mp3_source.sh && \
     ./contrib/scripts/install_prereq install && \
