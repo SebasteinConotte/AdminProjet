@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 RUN apt-get update && \
-    apt-get install build-essential wget libssl-dev libncurses5-dev \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential wget libssl-dev libncurses5-dev \
     libnewt-dev libxml2-dev linux-headers-$(uname -r) uuid-dev \
     libsqlite3-dev libjansson-dev && \
     wget http://downloads.asterisk.org/pub/telephony/asterisk/asterisk-15-current.tar.gz && \
