@@ -9,7 +9,6 @@ RUN apt-get update && \
     tar -xzvf asterisk-15-current.tar.gz &&  \
     cd asterisk-15.*/  && \
     ./contrib/scripts/get_mp3_source.sh && \
-    ./contrib/scripts/install_prereq install && \
     ./configure && \
     make menuselect.makeopts && \
     menuselect/menuselect \
