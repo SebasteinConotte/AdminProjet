@@ -39,7 +39,7 @@ EXPOSE 16392/udp
 EXPOSE 16393/udp
 EXPOSE 16394/udp
     
-CMD ["/usr/sbin/asterisk", "-vvvdddf", "-T", "-W", "-U", "asterisk", "-p"]  
+CMD asterisk -fvvvvv
     
 
 
