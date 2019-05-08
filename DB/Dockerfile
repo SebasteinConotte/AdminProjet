@@ -8,7 +8,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     apt-get install -y --force-yes \
     mysql-server-5.7 && \
     DEBIAN_FRONTEND=noninteractive \
-    apt-get install pwgen  \
+    apt-get install -y pwgen  \
     build-essential  \
     netcat && \
     service mysql stop && \
