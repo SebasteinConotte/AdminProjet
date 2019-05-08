@@ -13,7 +13,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 
 RUN mkdir /script
 COPY /script/db_shema.sql /script/db_shema.sql
-RUN mysql_install_db
+RUN mysqld --initialize
 
 USER mysql
 
