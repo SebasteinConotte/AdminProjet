@@ -19,6 +19,6 @@ RUN mysqld --initialize-insecure --user=mysql --datadir=data/
 
 USER mysql
 
-CMD ["mysqld_safe", "--init-file=script/db_shema.sql", "--skip-name-resolve"]
+CMD ["/usr/sbin/mysqld", "--init-file=script/db_shema.sql", "--skip-name-resolve"]
 
 EXPOSE 3306
