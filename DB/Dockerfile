@@ -7,6 +7,9 @@ RUN DEBIAN_FRONTEND=noninteractive \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install -y --force-yes \
     mysql-server-5.7 && \
+    apt-get install pwgen && \
+    apt-get install build-essential && \
+    apt-get install netcat && \
     service mysql stop && \
     sed -e 's/^datadir\t.*$/datadir = \/data/' -i /etc/mysql/my.cnf && \
     sed -e 's/^bind-address\t.*$/bind-address = 51.77.203.89/' -i /etc/mysql/my.cnf && \
