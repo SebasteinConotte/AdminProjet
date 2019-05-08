@@ -11,9 +11,9 @@ RUN DEBIAN_FRONTEND=noninteractive \
     sed -e 's/^bind-address\t.*$/bind-address = 51.77.203.89/' -i /etc/mysql/my.cnf && \
     apt-get clean 
 
-RUN mkdir /script
+RUN mkdir script && mkdir data
 COPY /script/db_shema.sql /script/db_shema.sql
-RUN mysqld --initialize
+RUN mysqld --initialize-insecure --user=mysql --datadir=data/
 
 USER mysql
 
