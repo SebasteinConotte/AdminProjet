@@ -1,4 +1,6 @@
-create database WoodyToys;
+GRANT ALL PRIVILEGES ON *.* TO root@'%' IDENTIFIED BY 'mysql' WITH GRANT OPTION;
+
+CREATE database WoodyToys;
 use WoodyToys;
 
 CREATE TABLE Account
@@ -17,4 +19,4 @@ insert into Client values ('HE1248','Godefroid Roger'   , 'r.Godefroid'     ,'gf
 insert into Client values ('HE7411','Florimont Maxime'     , 'm.Florimont'   ,'f4h89y4hd4s');
 insert into Client values ('HE4120','Priest Pascal' , 'p.Priest' ,'2g8rf4g986');
 
-flush privileges;
+FLUSH PRIVILEGES;
