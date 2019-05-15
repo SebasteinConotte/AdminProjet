@@ -3,7 +3,7 @@ FROM debian:latest
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get install -y supervisor postfix dovecot-core dovecot-pop3d dovecot-imapd
+RUN apt-get update && apt-get upgrade && apt-get install -y supervisor postfix dovecot-core dovecot-pop3d dovecot-imapd
 
 RUN groupadd -g 5000 vmail && useradd -s /usr/sbin/nologin -u 5000 -g 5000 vmail && \
 	usermod -aG vmail postfix && \
