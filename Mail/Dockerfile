@@ -19,11 +19,11 @@ RUN groupadd -g 5000 vmail && useradd -s /usr/sbin/nologin -u 5000 -g 5000 vmail
 	cd /etc/dovecot/ssl && \
 	openssl req -new -newkey rsa:3072 -nodes -keyout mailserver.key -days 9999 -x509 -out mailserver.crt 
 
-ADD "lien" /etc/manguser/install.sh	
-ADD "lien" /etc/manguser/create_user.sh	
-ADD "lien" /etc/postfix/main.cf
-ADD "lien" /etc/dovecot/dovecot.conf
-ADD "lien" /etc/postfix/master.cf
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/install.sh /etc/manguser/install.sh	
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/config/create_user.sh /etc/manguser/create_user.sh	
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/config/main.cf /etc/postfix/main.cf
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/config/dovecot.conf /etc/dovecot/dovecot.conf
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/config/master.cf /etc/postfix/master.cf
 
 RUN cd /etc/manguser/
 RUN ./create_user.sh a.lemaire@w15.ephec-ti.be dfq154dgf5
