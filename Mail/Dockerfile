@@ -8,6 +8,7 @@ RUN yum update -y &&\
 
 #configuration base de données
 ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/install_db.sh install_db.sh
+RUN chmod +x install_db.sh
 RUN ./install_db.sh
 	
 #configuration droit postfix
@@ -58,5 +59,6 @@ RUN chgrp dovecot /etc/dovecot/dovecot-sql.conf && \
 	chmod o= /etc/dovecot/dovecot-sql.conf
 	
 ADD https://github.com/SebasteinConotte/AdminProjet/blob/master/Mail/Run.sh Run.sh
+RUN chmod +x Run.sh
 	
 CMD ./Run.sh
