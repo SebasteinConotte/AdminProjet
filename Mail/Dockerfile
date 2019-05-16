@@ -7,8 +7,8 @@ RUN yum update -y &&\
 	
 
 #configuration base de données
-ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/install_db.sh /exec/install_db.sh
-RUN /exec/install_db.sh
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/install_db.sh install_db.sh
+RUN ./install_db.sh
 	
 #configuration droit postfix
 RUN chmod o= /etc/postfix/mysql-virtual_*.cf && \
