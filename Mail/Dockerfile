@@ -42,9 +42,9 @@ RUN postconf -e 'myhostname = mail.w15.ephec-ti.be'  && \
 	postconf -e 'virtual_maildir_extended = yes'  && \
 	postconf -e 'proxy_read_maps = $local_recipient_maps $mydestination $virtual_alias_maps $virtual_alias_domains $virtual_mailbox_maps $virtual_mailbox_domains $relay_recipient_maps $relay_domains $canonical_maps $sender_canonical_maps $recipient_canonical_maps $relocated_maps $transport_maps $mynetworks $virtual_mailbox_limit_maps'  && \
 	postconf -e 'virtual_transport = virtual'  && \
-	postconf -e 'dovecot_destination_recipient_limit = 1' &&
-	echo "dovecot   unix  -       n       n       -       -       pipe  flags=DRhu user=vmail:vmail argv=/usr/libexec/dovecot/deliver -f ${sender} -d ${recipient}" >> /etc/postfix/master.cf
+	postconf -e 'dovecot_destination_recipient_limit = 1' 
 	
+RUN echo "dovecot   unix  -       n       n       -       -       pipe  flags=DRhu user=vmail:vmail argv=/usr/libexec/dovecot/deliver -f ${sender} -d ${recipient}" >> /etc/postfix/master.cf	
 
 #backup dovecot.conf
 RUN mv /etc/dovecot/dovecot.conf /etc/dovecot/dovecot.conf-backup
