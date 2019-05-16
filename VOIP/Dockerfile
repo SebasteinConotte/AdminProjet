@@ -24,6 +24,7 @@ ADD  https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/
 ADD  https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/config/extensions.conf /etc/asterisk/extensions.conf
 ADD  https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/config/voicemail.conf /etc/asterisk/voicemail.conf
 ADD  https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/config/queues.conf /etc/asterisk/queues.conf
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/config/features.conf /etc/asterisk/features.conf
 
 
 EXPOSE 5060 5060/udp
