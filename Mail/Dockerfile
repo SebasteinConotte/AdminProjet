@@ -7,7 +7,7 @@ RUN yum update -y &&\
 	
 
 #configuration base de données
-ADD "lien" /exec/install_db.sh
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/install_db.sh /exec/install_db.sh
 RUN /exec/install_db.sh
 	
 #configuration droit postfix
@@ -50,13 +50,13 @@ RUN postconf -e 'myhostname = mail.w15.ephec-ti.be'  && \
 RUN mv /etc/dovecot/dovecot.conf /etc/dovecot/dovecot.conf-backup
 
 #configuration dovecot
-ADD "lien" /etc/dovecot/dovecot.conf
-ADD "lien" /etc/dovecot/dovecot-sql.conf
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/config_dovecot/dovecot.conf /etc/dovecot/dovecot.conf
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/config_dovecot/dovecot-sql.conf /etc/dovecot/dovecot-sql.conf
 
 #configuration droit dovecot
 RUN chgrp dovecot /etc/dovecot/dovecot-sql.conf && \
 	chmod o= /etc/dovecot/dovecot-sql.conf
 	
-ADD "lien" Run.sh
+ADD https://github.com/SebasteinConotte/AdminProjet/blob/master/Mail/Run.sh Run.sh
 	
 CMD ./Run.sh
