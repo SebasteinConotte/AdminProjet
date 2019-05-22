@@ -2,8 +2,8 @@
 
 
 service mysql start
-mysqladmin -u root password d83jf734g8
-mysql -u root -pd83jf734g8
+
+mysql -u root
 
 # create database and apply permissions
 mysql> CREATE DATABASE mail;  
