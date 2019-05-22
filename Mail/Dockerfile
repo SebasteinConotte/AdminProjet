@@ -3,7 +3,7 @@ FROM ubuntu
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -y &&\
-	apt-get install postfix mailx mutt -y && \
+	apt-get install postfix mailutils bsd-mailx mutt -y && \
 	apt-get install dovecot mysql-server dovecot-mysql cyrus-sasl cyrus-sasl-devel -y 
 	
 	
