@@ -2,7 +2,7 @@
 
 /etc/init.d/mysql start
 
-mysql -u root -p
+mysql -u uroot 
 
 # create database and apply permissions
 mysql> CREATE DATABASE mail;  
