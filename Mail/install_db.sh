@@ -1,8 +1,9 @@
 #!/bin/bash
 
-/etc/init.d/mysql start
+
 
 mysqladmin -u uroot password d83jf734g8
+/etc/init.d/mysql start -u uroot -p d83jf734g8
 mysql -u uroot -p pd83jf734g8
 
 # create database and apply permissions
