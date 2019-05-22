@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update -y &&\
 	apt-get install postfix mailutils bsd-mailx mutt -y && \
-	apt-get install dovecot mysql-server dovecot-mysql cyrus-sasl cyrus-sasl-devel -y 
+	apt-get install dovecot-imapd dovecot-pop3d  mysql-server dovecot-mysql sasl2-bin cyrus-imapd-2.4 -y 
 	
 	
 
