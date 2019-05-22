@@ -1,8 +1,10 @@
-FROM centos
+FROM Ubuntu
 
-RUN yum update -y &&\
-	yum --enablerepo=centosplus install postfix mailx mutt -y && \
-	yum install dovecot mysql-server dovecot-mysql cyrus-sasl cyrus-sasl-devel -y 
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update -y &&\
+	apt-get install postfix mailx mutt -y && \
+	apt-get install dovecot mysql-server dovecot-mysql cyrus-sasl cyrus-sasl-devel -y 
 	
 	
 
