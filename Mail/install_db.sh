@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-service mysqld start
+service mysql start
 mysqladmin -u root password d83jf734g8
 mysql -u root -pd83jf734g8
 
