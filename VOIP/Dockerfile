@@ -25,10 +25,14 @@ ADD  https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/
 ADD  https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/config/voicemail.conf /etc/asterisk/voicemail.conf
 ADD  https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/config/queues.conf /etc/asterisk/queues.conf
 ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/config/features.conf /etc/asterisk/features.conf
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/config/asterisk /etc/logrotate.d/asterisk
 
 
+RUN sed -i "s/rtpend=20000/rtpend=15000/g" /etc/asterisk/rtp.conf
+
+RUN logrotate /etc/logrotate.conf
 EXPOSE 5060 5060/udp
-EXPOSE 10000-20000/udp
+EXPOSE 10000-15000/udp
     
 CMD asterisk -f
     
