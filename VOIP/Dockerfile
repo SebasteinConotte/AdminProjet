@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential wget libssl-dev libncurses5-dev \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential wget libssl-dev libncurses5-dev  logrotate \
     libnewt-dev libxml2-dev linux-headers-$(uname -r) uuid-dev \
     libsqlite3-dev libjansson-dev  \
     subversion && \
