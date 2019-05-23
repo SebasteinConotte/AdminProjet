@@ -30,7 +30,7 @@ ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/c
 EXPOSE 5060 5060/udp
 EXPOSE 10000-20000/udp
     
-CMD asterisk -fvvvvv
+CMD asterisk -f
     
 
 
