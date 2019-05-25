@@ -46,7 +46,7 @@ EXPOSE 16392/udp
 EXPOSE 16393/udp
 EXPOSE 16394/udp
     
-CMD asterisk -f
+CMD asterisk -fvvvvv
     
 
 
