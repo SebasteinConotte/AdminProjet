@@ -32,7 +32,7 @@ RUN sed -i "s/rtpend=20000/rtpend=15000/g" /etc/asterisk/rtp.conf
 
 RUN logrotate /etc/logrotate.conf
 EXPOSE 5060 5060
-EXPOSE 10000-15000
+EXPOSE 10000-15000/udp
     
 CMD asterisk -fvvvvv
     
