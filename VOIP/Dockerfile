@@ -28,13 +28,17 @@ ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/c
 ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/config/asterisk /etc/logrotate.d/asterisk
 
 
-RUN sed -i "s/rtpend=20000/rtpend=15000/g" /etc/asterisk/rtp.conf
+RUN sed -i "s/rtpend=20000/rtpend=10003/g" /etc/asterisk/rtp.conf
 
 RUN logrotate /etc/logrotate.conf
-EXPOSE 5060 5060
-EXPOSE 10000-15000/udp
+EXPOSE 5060
+EXPOSE 5060/udp
+EXPOSE 10000/udp
+EXPOSE 10001/udp
+EXPOSE 10002/udp
+EXPOSE 10003/udp
     
-CMD asterisk -fvvvvv
+CMD asterisk -f
     
 
 
