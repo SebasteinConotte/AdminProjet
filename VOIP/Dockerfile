@@ -1,7 +1,8 @@
 FROM ubuntu:16.04
 
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential wget libssl-dev libncurses5-dev  logrotate \
+RUN add-apt-repository ppa:adiscon/v8-stable && \
+	apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential wget libssl-dev libncurses5-dev  logrotate rsyslog \
     libnewt-dev libxml2-dev linux-headers-$(uname -r) uuid-dev \
     libsqlite3-dev libjansson-dev  \
     subversion && \
