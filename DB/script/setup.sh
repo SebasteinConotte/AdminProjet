@@ -1,39 +1,4 @@
 #!/bin/bash
-
-
-
-# If a volume is mounted on /var/lib/mysql, the db installed by apt-get will be replaced by the files in the volume.
-
-#  - if this folder is empty (fresh install), we need to run mysql_install_db in order to start the daemon.
-
-#  - if this folder is not empty, we assume it is a "working" mysql datadir (w/ potential data in it) and do nothing.
-
-#  - TODO if no volume is mounted (-> db is hosted in the container), only create the admin account.
-
-if [ "$(ls -A /var/lib/mysql)" ]; then
-
-	
-
-	echo "========================================================================="
-
-	echo "# The volume mounted on /var/lib/mysql is not empty, mysql_install_db will not run."
-
-	echo "# If you need a fresh mysql db, please clear the volume and re-build the image."
-
-	echo "#"
-
-
-
-	# already has a databse, simply starting the daemon
-
-	mysqld_safe --skip-syslog
-
-
-
-else
-
-
-
    # We will create a new db in the volume with mysql_install_db.
 
    # Since the db is "fresh", we will have lost the accounts created by apt-get on the install stage and
