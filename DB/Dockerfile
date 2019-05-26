@@ -1,17 +1,26 @@
+FROM ubuntu:16.04
 
-FROM centos:6.6
-RUN yum -y install mysql-server-5.1.73
-
-ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/my.cnf /etc/my.cnf
-ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/db_shema.sql /db_shema.sql
-
-RUN mysql_install_db
-
-USER mysql
-
-EXPOSE 3306
-
-CMD ["mysqld_safe", "--init-file=/db_shema.sql", "--skip-name-resolve"]
+RUN echo "mysql-server mysql-server/root_password password test0155" | debconf-set-selections
+RUN echo "mysql-server mysql-server/root_password_again password test0155" | debconf-set-selections
 
 
 
+RUN apt-get update -y && \
+	apt-get install -y mysql-server
+
+
+
+ADD init.sh  /tmp/
+ADD run.sh /temp/
+ADD db_shema.sql /temp/
+COPY mysqld.cnf /etc/mysql/mysql.conf.d/
+
+
+RUN chmod +x /tmp/init.sh && chmod +x /tmp/run.sh
+RUN /tmp/init.sh
+
+
+EXPOSE 3306/tcp
+
+
+ENTRYPOINT "/tmp/run.sh"
