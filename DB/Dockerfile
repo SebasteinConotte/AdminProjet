@@ -2,8 +2,8 @@
 FROM centos:6.6
 RUN yum -y install mysql-server-5.1.73
 
-ADD "link" /etc/my.cnf
-ADD "link" /db_shema.sql
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/my.cnf /etc/my.cnf
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/db_shema.sql /db_shema.sql
 
 RUN mysql_install_db
 
