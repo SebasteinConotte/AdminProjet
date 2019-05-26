@@ -134,5 +134,3 @@
 	mysqld_safe --skip-syslog
 
 
-
-fi
