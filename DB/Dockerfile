@@ -28,8 +28,7 @@ RUN chmod +x /home/setup.sh
 
 
 
-# Define mountable directories.
-VOLUME ["/var/lib/mysql"]
+
 
 # Define working directory.
 WORKDIR /var/lib/mysql
