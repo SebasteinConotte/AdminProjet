@@ -22,8 +22,8 @@ RUN apt-get -y install mysql-server
 
 
 # add our my.cnf and setup script
-ADD "lien" /etc/mysql/my.cnf
-ADD "lien" /home/setup.sh
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/my.cnf /etc/mysql/my.cnf
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/setup.sh /home/setup.sh
 RUN chmod +x /home/setup.sh
 
 
