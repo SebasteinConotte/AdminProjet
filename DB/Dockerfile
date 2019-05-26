@@ -24,7 +24,7 @@ RUN apt-get -y install mysql-server
 # add our my.cnf and setup script
 ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/my.cnf /etc/mysql/my.cnf
 ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/setup.sh /home/setup.sh
-ADD "lien" /home/db_shema.sql
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/db_shema.sql /home/db_shema.sql
 RUN chmod +x /home/setup.sh
 
 
