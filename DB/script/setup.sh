@@ -131,6 +131,6 @@
 
 	service mysql stop
 
-	mysqld_safe --skip-syslog --init-file=/home/db_shema.sql
+	mysqld_safe --skip-syslog 
 
 
