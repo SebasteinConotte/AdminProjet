@@ -21,7 +21,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `db_ephec`
 --
-CREATE DATABASE IF NOT EXISTS `db_ephec` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci;
+CREATE DATABASE IF NOT EXISTS `db_ephec` DEFAULT CHARACTER SET utf8mb4;
 USE `db_ephec`;
 
 -- --------------------------------------------------------
@@ -37,7 +37,7 @@ CREATE TABLE `CLIENT` (
   `LOCALITE` varchar(12) NOT NULL,
   `CAT` char(2) DEFAULT NULL,
   `COMPTE` decimal(9,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `CLIENT`
@@ -71,7 +71,7 @@ CREATE TABLE `COMMANDE` (
   `NCOM` char(5) NOT NULL,
   `NCLI` char(4) NOT NULL,
   `DATECOM` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `COMMANDE`
@@ -96,7 +96,7 @@ CREATE TABLE `DETAIL` (
   `NCOM` char(5) NOT NULL,
   `NPRO` char(5) NOT NULL,
   `QCOM` decimal(4,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `DETAIL`
@@ -129,7 +129,7 @@ CREATE TABLE `PRODUIT` (
   `LIBELLE` varchar(20) NOT NULL,
   `PRIX` decimal(5,0) NOT NULL,
   `QSTOCK` decimal(6,0) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `PRODUIT`
