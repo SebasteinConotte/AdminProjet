@@ -1,4 +1,3 @@
-GRANT ALL PRIVILEGES ON *.* TO root@'%';
 
 create database WoodyToys;
 use WoodyToys;
