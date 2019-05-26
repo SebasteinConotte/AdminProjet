@@ -1,24 +1,17 @@
-FROM ubuntu:16.04
 
+FROM centos:6.6
+RUN yum -y install mysql-server-5.1.73
 
-# Install MySQL 5.7
-RUN DEBIAN_FRONTEND=noninteractive \
-    apt-get update &&\
-    DEBIAN_FRONTEND=noninteractive \
-    apt-get install -y --force-yes \
-    mysql-server-5.7 && \
-    service mysql stop && \
-    sed -e 's/^bind-address\t.*$/bind-address = 51.77.203.89/' -i /etc/mysql/my.cnf && \
-    apt-get clean 
+ADD "link" /etc/my.cnf
+ADD "link" /db_shema.sql
 
-RUN mkdir -p /var/run/mysqld
-RUN chown mysql:mysql /var/run/mysqld
-RUN mkdir script && mkdir data
-COPY /script/db_shema.sql /script/db_shema.sql
-RUN mysqld --initialize-insecure --user=mysql --datadir=data/
+RUN mysql_install_db
 
 USER mysql
 
-CMD ["/usr/sbin/mysqld", "--init-file=script/db_shema.sql", "--skip-name-resolve"]
-
 EXPOSE 3306
+
+CMD ["mysqld_safe", "--init-file=/db_shema.sql", "--skip-name-resolve"]
+
+
+
