@@ -13,7 +13,7 @@ RUN apt-get update -y && \
 ADD   https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/init.sh /tmp/
 ADD  https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/run.sh /tmp/
 ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/db_shema.sql /tmp/
-COPY https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/mysqld.cnf /etc/mysql/mysql.conf.d/
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/mysqld.cnf /etc/mysql/mysql.conf.d/
 
 
 RUN chmod +x /tmp/init.sh && chmod +x /tmp/run.sh
