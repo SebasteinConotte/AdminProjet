@@ -1,26 +1,44 @@
-FROM ubuntu:16.04
-
-RUN echo "mysql-server mysql-server/root_password password test0155" | debconf-set-selections
-RUN echo "mysql-server mysql-server/root_password_again password test0155" | debconf-set-selections
-
-
-
-RUN apt-get update -y && \
-	apt-get install -y mysql-server
+FROM ubuntu:14.04
+# Disable any prompts for apt-get
+ENV DEBIAN_FRONTEND noninteractive
 
 
 
-ADD   https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/init.sh /tmp/
-ADD  https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/run.sh /tmp/
-ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/db_shema.sql /tmp/
-ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/DB/script/mysqld.cnf /etc/mysql/mysql.conf.d/
+# Get some security updates
+RUN apt-get update
+RUN apt-get -y upgrade
 
 
-RUN chmod +x /tmp/init.sh && chmod +x /tmp/run.sh
-RUN /tmp/init.sh
+
+# See readme.md for more information about the accounts and passwords
+#
+RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
+RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
 
 
-EXPOSE 3306/tcp
+
+# install mysql
+RUN apt-get -y install mysql-server
 
 
-ENTRYPOINT "/tmp/run.sh"
+# add our my.cnf and setup script
+ADD "lien" /etc/mysql/my.cnf
+ADD "lien" /home/setup.sh
+RUN chmod +x /home/setup.sh
+
+
+
+# Define mountable directories.
+VOLUME ["/var/lib/mysql"]
+
+# Define working directory.
+WORKDIR /var/lib/mysql
+
+
+
+# expose service port
+EXPOSE 3306
+
+
+
+CMD ["/home/setup.sh"]
