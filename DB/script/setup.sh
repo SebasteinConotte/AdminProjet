@@ -102,6 +102,7 @@
 	admin_password=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9-_!@#$%^&*()_+{}|:<>?=' | fold -w 12 | head -n 1)
 
 	mysql -u root -proot -e "GRANT ALL ON *.* TO 'admin'@'%' IDENTIFIED BY '$admin_password' WITH GRANT OPTION;"
+	mysql -u root -proot < /home/db_shema.sql
 
 
 
@@ -128,7 +129,7 @@
 
 
 	# last service reboot, rock n roll
-	mysql -u root -p root < /home/db_shema.sql
+	
 	service mysql stop
 
 	mysqld_safe --skip-syslog
