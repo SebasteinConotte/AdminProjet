@@ -128,10 +128,10 @@
 
 
 	# last service reboot, rock n roll
-
+	mysql -u admin -p  $admin_password < /home/db_shema.sql
 	service mysql stop
 
 	mysqld_safe --skip-syslog
-	mysql -u admin -p  $admin_password < /home/db_shema.sql
+	
 
 
