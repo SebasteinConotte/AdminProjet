@@ -1,8 +1,8 @@
 #!/bin/bash
 
 #start postfix
-service postfix start
+service postfix restart
 
 
 # start dovecot
-systemctl start dovecot.service
+service dovecot restart
