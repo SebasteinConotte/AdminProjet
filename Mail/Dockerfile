@@ -98,7 +98,8 @@ RUN postconf -e 'myhostname = mail.w15.ephec-ti.be' && \
 
 WORKDIR /etc/postfix
 RUN openssl req -new -outform PEM -out smtpd.cert -newkey rsa:2048 -nodes \
-  -keyout smtpd.key -keyform PEM -days 365 -x509 
+  -keyout smtpd.key -keyform PEM -days 365 -x509 \
+  -subj "/C=BE/ST=Wavre/L=Wavre/O=WoodyToys/OU=IT Department/CN=w15.ephec-ti.be"
   
 RUN chmod o= /etc/postfix/smtpd.key
 
