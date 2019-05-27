@@ -1,6 +1,6 @@
 # create database and apply permissions
 CREATE DATABASE mail;  
-use mail  
+use mail;  
 GRANT SELECT, INSERT, UPDATE, DELETE ON mail.* TO 'mail_admin'@'localhost' IDENTIFIED BY 'password';  
 GRANT SELECT, INSERT, UPDATE, DELETE ON mail.* TO 'mail_admin'@'localhost.localdomain' IDENTIFIED BY 'password';  
 FLUSH PRIVILEGES;
