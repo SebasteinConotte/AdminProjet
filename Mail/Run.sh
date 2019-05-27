@@ -5,4 +5,4 @@ service postfix restart
 
 
 # start dovecot
-service dovecot restart
+systemctl restart dovecot
