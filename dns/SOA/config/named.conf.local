@@ -1,5 +1,7 @@
 acl internals {
   127.0.0.1;
+  127.17.0.1;
+  51.77.203.87;
 };
 
 view internal {
