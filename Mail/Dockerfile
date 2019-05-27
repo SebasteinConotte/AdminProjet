@@ -11,10 +11,10 @@ RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-s
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
 
 #configuration base 
-ADD "lien" /home/setup.sh
-ADD "lien" /etc/mysql/my.cnf
-ADD "lien" /home/install_db.sql
-ADD "lien" /home/gene_conf.sh
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/setup.sh /home/setup.sh
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/my.cnf /etc/mysql/my.cnf
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/install_db.sql /home/install_db.sql
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/gene_conf.sh /home/gene_conf.sh
 RUN chmod +x /home/gene_conf.sh
 RUN chmod +x /home/install_db.sql
 RUN chmod +x /home/setup.sh
@@ -61,14 +61,14 @@ RUN echo "dovecot   unix  -       n       n       -       -       pipe  flags=DR
 RUN mv /etc/dovecot/dovecot.conf /etc/dovecot/dovecot.conf-backup
 
 #configuration dovecot
-ADD "lien" /etc/dovecot/dovecot.conf
-ADD "lien" /etc/dovecot/dovecot-sql.conf
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/config_dovecot/dovecot.conf /etc/dovecot/dovecot.conf
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/config_dovecot/dovecot-sql.conf /etc/dovecot/dovecot-sql.conf
 
 #configuration droit dovecot
 RUN chgrp dovecot /etc/dovecot/dovecot-sql.conf && \
 	chmod o= /etc/dovecot/dovecot-sql.conf
 	
-ADD "lien" /home/Run.sh
+ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/Run.sh /home/Run.sh
 RUN chmod +x /home/Run.sh
 RUN sed -i -e 's/\r$//' /home/Run.sh
 	
