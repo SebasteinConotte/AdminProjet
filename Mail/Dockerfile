@@ -2,17 +2,24 @@ FROM ubuntu
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+
 RUN apt-get update -y &&\
 	apt-get install postfix mailutils bsd-mailx mutt -y && \
 	apt-get install dovecot-imapd dovecot-pop3d  mysql-server dovecot-mysql sasl2-bin  -y 
 	
-	
+RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
+RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
 
-#configuration base de données
-ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/install_db.sh install_db.sh
-RUN chmod +x install_db.sh
-RUN sed -i -e 's/\r$//' install_db.sh
-RUN ./install_db.sh
+#configuration base 
+ADD "lien" /home/setup.sh
+ADD "lien" /etc/mysql/my.cnf
+ADD "lien" /home/install_db.sql
+ADD "lien" /home/gene_conf.sh
+RUN chmod +x /home/gene_conf.sh
+RUN chmod +x /home/install_db.sql
+RUN chmod +x /home/setup.sh
+RUN /home/setup.sh
+RUN /home/gene_conf.sh
 	
 #configuration droit postfix
 RUN chmod o= /etc/postfix/mysql-virtual_*.cf && \
@@ -54,15 +61,15 @@ RUN echo "dovecot   unix  -       n       n       -       -       pipe  flags=DR
 RUN mv /etc/dovecot/dovecot.conf /etc/dovecot/dovecot.conf-backup
 
 #configuration dovecot
-ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/config_dovecot/dovecot.conf /etc/dovecot/dovecot.conf
-ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/config_dovecot/dovecot-sql.conf /etc/dovecot/dovecot-sql.conf
+ADD "lien" /etc/dovecot/dovecot.conf
+ADD "lien" /etc/dovecot/dovecot-sql.conf
 
 #configuration droit dovecot
 RUN chgrp dovecot /etc/dovecot/dovecot-sql.conf && \
 	chmod o= /etc/dovecot/dovecot-sql.conf
 	
-ADD https://github.com/SebasteinConotte/AdminProjet/blob/master/Mail/Run.sh Run.sh
-RUN chmod +x Run.sh
-RUN sed -i -e 's/\r$//' Run.sh
+ADD "lien" /home/Run.sh
+RUN chmod +x /home/Run.sh
+RUN sed -i -e 's/\r$//' /home/Run.sh
 	
-CMD ./Run.sh
+CMD /home/Run.sh
