@@ -5,4 +5,4 @@ service postfix start
 
 
 # start dovecot
-service dovecot start
+systemctl start dovecot.service
