@@ -22,7 +22,6 @@ ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/g
 RUN chmod +x /home/gene_conf.sh
 RUN chmod +x /home/install_db.sql
 RUN chmod +x /home/setup.sh
-RUN /home/setup.sh
 RUN /home/gene_conf.sh
 	
 #configuration droit postfix
@@ -75,5 +74,6 @@ RUN chgrp dovecot /etc/dovecot/dovecot-sql.conf && \
 ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/Run.sh /home/Run.sh
 RUN chmod +x /home/Run.sh
 RUN sed -i -e 's/\r$//' /home/Run.sh
+RUN /home/RUN.sh
 	
-CMD /home/Run.sh
+CMD ["/home/setup.sh"]
