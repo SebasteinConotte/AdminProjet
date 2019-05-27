@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #start postfix
-service sendmail stop
 service postfix start
 
 

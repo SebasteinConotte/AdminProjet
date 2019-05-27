@@ -9,7 +9,7 @@ RUN apt-get update
 RUN apt-get -y upgrade
 
 RUN apt-get install postfix mailutils bsd-mailx mutt -y && \
-	apt-get install dovecot-imapd dovecot-pop3d  mysql-server dovecot-mysql sasl2-bin  -y 
+	apt-get install dovecot-core dovecot-imapd dovecot-pop3d  mysql-server dovecot-mysql sasl2-bin  -y 
 	
 RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
 RUN echo "mysql-server mysql-server/root_password_again password root" | debconf-set-selections
