@@ -74,6 +74,6 @@ RUN chgrp dovecot /etc/dovecot/dovecot-sql.conf && \
 ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/Mail/Run.sh /home/Run.sh
 RUN chmod +x /home/Run.sh
 RUN sed -i -e 's/\r$//' /home/Run.sh
-RUN /home/RUN.sh
+RUN /home/Run.sh
 	
 CMD ["/home/setup.sh"]
