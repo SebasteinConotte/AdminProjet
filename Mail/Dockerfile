@@ -1,10 +1,14 @@
-FROM ubuntu
+FROM ubuntu:14.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+WORKDIR /var/lib/mysql
 
-RUN apt-get update -y &&\
-	apt-get install postfix mailutils bsd-mailx mutt -y && \
+
+RUN apt-get update
+RUN apt-get -y upgrade
+
+RUN apt-get install postfix mailutils bsd-mailx mutt -y && \
 	apt-get install dovecot-imapd dovecot-pop3d  mysql-server dovecot-mysql sasl2-bin  -y 
 	
 RUN echo "mysql-server mysql-server/root_password password root" | debconf-set-selections
