@@ -33,7 +33,6 @@ RUN apt-get update && \
 	mariadb-server
 
 RUN sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
-COPY cfg/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ENV Q1 CREATE DATABASE $MYSQL_DBNAME;\
     USE $MYSQL_DBNAME;\
     GRANT SELECT, INSERT, UPDATE, DELETE ON $MYSQL_DBNAME.* TO $MYSQL_USERNAME@\'%\' IDENTIFIED BY \'$MYSQL_PASSWORD\'; \
