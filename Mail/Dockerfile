@@ -49,6 +49,10 @@ RUN service mysql start && \
 
 RUN groupadd -g 5000 vmail && useradd -g vmail -u 5000 vmail -d /var/vmail
 
+WORKDIR /etc/ssl/mailsrv
+RUN openssl req -new -outform PEM -out smtpd.cert -newkey rsa:2048 -nodes \
+  -keyout smtpd.key -keyform PEM -days 365 -x509 \
+  -subj "/C=BE/ST=Wavre/L=Wavre/O=WoodyToys/OU=IT Department/CN=w15.ephec-ti.be"
 
 
 COPY config/postfix/    /etc/postfix/
