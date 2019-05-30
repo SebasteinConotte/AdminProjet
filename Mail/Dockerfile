@@ -122,9 +122,9 @@ RUN chown -R vmail:dovecot /etc/dovecot && \
 
 RUN service mysql start && \
   mysql -u root -e "USE mailserver; \
-    INSERT INTO `mailserver`.`virtual_domains`(`id` ,`name`)VALUES('1', 'w15.ephec-ti.be'); \
-    INSERT INTO `mailserver`.`virtual_users`(`id`, `domain_id`, `password` , `email`)VALUES('1', '1', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'l.lemaire@w15.ephec-ti.be'),('2', '1', ENCRYPT('admin_password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'admin@w15.ephec-ti.be'); \
-	INSERT INTO `mailserver`.`virtual_aliases`(`id`, `domain_id`, `source`, `destination`)VALUES('1', '1', 'contact@w15.ephec-ti.be', 'l.lemaire@w15.ephec-ti.be');"
+    INSERT INTO `virtual_domains`(`id` ,`name`)VALUES('1', 'w15.ephec-ti.be'); \
+    INSERT INTO `virtual_users`(`id`, `domain_id`, `password` , `email`) VALUES ('1', '1', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'l.lemaire@w15.ephec-ti.be'),('2', '1', ENCRYPT('admin_password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'admin@w15.ephec-ti.be'); \
+	INSERT INTO `virtual_aliases`(`id`, `domain_id`, `source`, `destination`) VALUES ('1', '1', 'contact@w15.ephec-ti.be', 'l.lemaire@w15.ephec-ti.be');"
 
 EXPOSE 995
 EXPOSE 993
