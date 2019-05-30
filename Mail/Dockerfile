@@ -1,84 +1,45 @@
-FROM debian:stretch
+FROM ubuntu:14.04
 
-
-ENV MYSQL_USERNAME mail_admin
-ENV MYSQL_PASSWORD "secret"
-ENV MYSQL_DBNAME   mailserver
-
-ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update
+RUN apt-get install -y postfix postfix-mysql dovecot-common dovecot-pop3d dovecot-imapd openssl dovecot-mysql mysql-server
+ADD postfix /etc/postfix
+ADD dovecot /etc/dovecot
 
-RUN apt-get update && \
-  apt-get install --assume-yes apt-utils && \
-  apt-get upgrade -y && \
-  apt-get install -y postfix \
-    postfix-mysql \
-    mysql-client \
-    mysql-server \
-    dovecot-common \
-	dovecot-lmtpd \
-	dovecot-core \
-	dovecot-pop3d \
-	dovecot-lmtpd \
-    dovecot-imapd \
-    dovecot-sieve \
-    dovecot-managesieved \
-    dovecot-mysql \
-    libsasl2-2 \
-    libsasl2-modules \
-    libsasl2-modules-sql \
-    sasl2-bin \
-    libpam-mysql \
-    openssl \
-    mailutils \
-    supervisor
+ENV DB_HOST localhost
+ENV DB_USER admin_mail 
+ENV DB_PASSWORD secret
+ENV DB_NAME mailserver
+ENV APP_HOST mail.w15.ephec-ti.be
+
+RUN groupadd -g 5000 vmail && \
+    useradd -g vmail -u 5000 vmail -d /home/vmail -m && \
+    chgrp postfix /etc/postfix/mysql-*.cf && \
+    chgrp vmail /etc/dovecot/dovecot.conf && \
+    chmod g+r /etc/dovecot/dovecot.conf
 
 RUN sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
-COPY cfg/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-ENV Q1 CREATE DATABASE $MYSQL_DBNAME;\
-    USE $MYSQL_DBNAME;\
-    GRANT SELECT, INSERT, UPDATE, DELETE ON $MYSQL_DBNAME.* TO $MYSQL_USERNAME@\'%\' IDENTIFIED BY \'$MYSQL_PASSWORD\'; \
-    GRANT SELECT, INSERT, UPDATE, DELETE ON $MYSQL_DBNAME.* TO $MYSQL_USERNAME@localhostlocaldomain IDENTIFIED BY \'$MYSQL_PASSWORD\'; \
-    FLUSH PRIVILEGES; \
-	CREATE TABLE `virtual_domains` (`id` int(11) NOT NULL auto_increment,`name` varchar(50) NOT NULL,PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8; \
-	CREATE TABLE `virtual_users` (`id` int(11) NOT NULL auto_increment,`domain_id` int(11) NOT NULL,`password` varchar(106) NOT NULL,`email` varchar(100) NOT NULL,PRIMARY KEY (`id`),UNIQUE KEY `email` (`email`),FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE ) ENGINE=InnoDB DEFAULT CHARSET=utf8; \
-	CREATE TABLE `virtual_aliases` (`id` int(11) NOT NULL auto_increment,`domain_id` int(11) NOT NULL,`source` varchar(100) NOT NULL,`destination` varchar(100) NOT NULL,PRIMARY KEY (`id`),FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-	
+
+
+   
 RUN service mysql start && \
-  mysql -u root -e "$Q1"
+  mysql -u root < shema_sql/mySQL.sql
 
-COPY cfg/mysql-virtual_domains.cf /etc/postfix/
 
-RUN sed -i 's/user = mail_admin/user = '"$MYSQL_USERNAME"'/' /etc/postfix/mysql-virtual_domains.cf
-RUN sed -i 's/password = mail_admin_password/password = '"$MYSQL_PASSWORD"'/' /etc/postfix/mysql-virtual_domains.cf
-RUN sed -i 's/dbname = mail/dbname = '"$MYSQL_DBNAME"'/' /etc/postfix/mysql-virtual_domains.cf
+RUN postconf -e virtual_uid_maps=static:5000 && \
+    postconf -e virtual_gid_maps=static:5000 && \
+    postconf -e virtual_mailbox_domains=mysql:/etc/postfix/mysql-virtual-mailbox-domains.cf && \
+    postconf -e virtual_mailbox_maps=mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf && \
+    postconf -e virtual_alias_maps=mysql:/etc/postfix/mysql-virtual-alias-maps.cf,mysql:/etc/postfix/mysql-email2email.cf && \
+    postconf -e virtual_transport=dovecot && \
+    postconf -e dovecot_destination_recipient_limit=1 && \
+	postconf -F '*/*/chroot = n'
+	
 
-COPY cfg/mysql-virtual_forwardings.cf /etc/postfix/
+RUN echo "dovecot   unix  -       n       n       -       -       pipe"  >> /etc/postfix/master.cf && \
+    echo '    flags=DRhu user=vmail:vmail argv=/usr/lib/dovecot/deliver -d ${recipient}' >> /etc/postfix/master.cf
 
-RUN sed -i 's/user = mail_admin/user = '"$MYSQL_USERNAME"'/' /etc/postfix/mysql-virtual_forwardings.cf
-RUN sed -i 's/password = mail_admin_password/password = '"$MYSQL_PASSWORD"'/' /etc/postfix/mysql-virtual_forwardings.cf
-RUN sed -i 's/dbname = mail/dbname = '"$MYSQL_DBNAME"'/' /etc/postfix/mysql-virtual_forwardings.cf
-
-COPY cfg/mysql-virtual_mailboxes.cf /etc/postfix/
-
-RUN sed -i 's/user = mail_admin/user = '"$MYSQL_USERNAME"'/' /etc/postfix/mysql-virtual_mailboxes.cf
-RUN sed -i 's/password = mail_admin_password/password = '"$MYSQL_PASSWORD"'/' /etc/postfix/mysql-virtual_mailboxes.cf
-RUN sed -i 's/dbname = mail/dbname = '"$MYSQL_DBNAME"'/' /etc/postfix/mysql-virtual_mailboxes.cf
-
-COPY cfg/mysql-virtual_email2email.cf /etc/postfix/
-
-RUN sed -i 's/user = mail_admin/user = '"$MYSQL_USERNAME"'/' /etc/postfix/mysql-virtual_email2email.cf
-RUN sed -i 's/password = mail_admin_password/password = '"$MYSQL_PASSWORD"'/' /etc/postfix/mysql-virtual_email2email.cf
-RUN sed -i 's/dbname = mail/dbname = '"$MYSQL_DBNAME"'/' /etc/postfix/mysql-virtual_email2email.cf
-
-RUN chmod o= /etc/postfix/mysql-virtual_*.cf && \
-  chgrp postfix /etc/postfix/mysql-virtual_*.cf && \
-  mkdir -p /var/mail/vhosts/w15.ephec-ti.be && \
-  groupadd -g 5000 vmail && \
-  useradd -g vmail -u 5000 vmail -d /var/vmail -m && \
-  chown -R vmail:vmail /var/mail
-
-COPY cfg/main.cf /etc/postfix/main.cf
+	
+ADD start.sh /start.sh	
 
 WORKDIR /etc/postfix
 RUN openssl req -new -outform PEM -out smtpd.cert -newkey rsa:2048 -nodes \
@@ -87,44 +48,19 @@ RUN openssl req -new -outform PEM -out smtpd.cert -newkey rsa:2048 -nodes \
   
 RUN chmod o= /etc/postfix/smtpd.key
 
-RUN mkdir -p /var/spool/postfix/var/run/saslauthd
-RUN cp -a /etc/default/saslauthd /etc/default/saslauthd.bak
 
-RUN sed -i 's/START=no/START=yes/' /etc/default/saslauthd
-RUN sed -i 's#OPTIONS=".*"#OPTIONS="-c -m /var/spool/postfix/var/run/saslauthd -r"#' /etc/default/saslauthd
-
-COPY cfg/smtp /etc/pam.d/
-COPY cfg/smtpd.conf /etc/postfix/sasl/
-
-RUN sed -i 's/sql_user: mail_admin/sql_user: '"$MYSQL_USERNAME"'/' /etc/postfix/sasl/smtpd.conf
-RUN sed -i 's/sql_passwd: mail_admin_password/sql_passwd: '"$MYSQL_PASSWORD"'/' /etc/postfix/sasl/smtpd.conf
-RUN sed -i 's/sql_database: mail/sql_passwd: '"$MYSQL_DBNAME"'/' /etc/postfix/sasl/smtpd.conf
-
-RUN chmod o= /etc/pam.d/smtp && \
-  chmod o= /etc/postfix/sasl/smtpd.conf && \
-  adduser postfix sasl
-
-COPY  cfg/master.cf /etc/postfix/master.cf
-
-COPY cfg/dovecot.conf /etc/dovecot/dovecot.conf
-COPY cfg/10-auth.conf /etc/dovecot/conf.d/10-auth.conf
-COPY cfg/10-mail.conf /etc/dovecot/conf.d/10-mail.conf
-COPY cfg/10-master.conf /etc/dovecot/conf.d/10-master.conf
-COPY cfg/auth-sql.conf.ext /etc/dovecot/conf.d/auth-sql.conf.ext
-COPY cfg/dovecot-sql.conf.ext /etc/dovecot/dovecot-sql.conf.ext
-COPY cfg/10-ssl.conf /etc/dovecot/conf.d/10-ssl.conf
-
-
-
-RUN chown -R vmail:dovecot /etc/dovecot && \
-	chmod -R o-rwx /etc/dovecot
+# SMTP ports
+EXPOSE 25
+EXPOSE 587
+  
+# POP and IMAP ports  
+EXPOSE 110
+EXPOSE 143
+EXPOSE 995
+EXPOSE 993
+EXPOSE 3306
 
 
 RUN service mysql start 
-
-EXPOSE 995
-EXPOSE 993
-EXPOSE 587
-EXPOSE 3306
-
-CMD ["/usr/bin/supervisord"]
+ 
+CMD sh start.sh

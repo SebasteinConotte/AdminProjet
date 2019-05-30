@@ -1,5 +1,0 @@
-user = mail_admin
-password = mail_admin_password
-dbname = mail
-query = SELECT destination FROM virtual_aliases WHERE source='%s'
-hosts = 127.0.0.1
