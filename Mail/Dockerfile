@@ -38,7 +38,7 @@ COPY cfg/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 ENV Q1 CREATE DATABASE $MYSQL_DBNAME;\
     USE $MYSQL_DBNAME;\
     GRANT SELECT, INSERT, UPDATE, DELETE ON $MYSQL_DBNAME.* TO $MYSQL_USERNAME@\'%\' IDENTIFIED BY \'$MYSQL_PASSWORD\'; \
-    GRANT SELECT, INSERT, UPDATE, DELETE ON $MYSQL_DBNAME.* TO $MYSQL_USERNAME@localhost.localdomain IDENTIFIED BY \'$MYSQL_PASSWORD\'; \
+    GRANT SELECT, INSERT, UPDATE, DELETE ON $MYSQL_DBNAME.* TO $MYSQL_USERNAME@localhostlocaldomain IDENTIFIED BY \'$MYSQL_PASSWORD\'; \
     FLUSH PRIVILEGES; \
 	CREATE TABLE `virtual_domains` (`id` int(11) NOT NULL auto_increment,`name` varchar(50) NOT NULL,PRIMARY KEY (`id`)) ENGINE=InnoDB DEFAULT CHARSET=utf8; \
 	CREATE TABLE `virtual_users` (`id` int(11) NOT NULL auto_increment,`domain_id` int(11) NOT NULL,`password` varchar(106) NOT NULL,`email` varchar(100) NOT NULL,PRIMARY KEY (`id`),UNIQUE KEY `email` (`email`),FOREIGN KEY (domain_id) REFERENCES virtual_domains(id) ON DELETE CASCADE ) ENGINE=InnoDB DEFAULT CHARSET=utf8; \
@@ -120,11 +120,7 @@ RUN chown -R vmail:dovecot /etc/dovecot && \
 	chmod -R o-rwx /etc/dovecot
 
 
-RUN service mysql start && \
-  mysql -u root -e "USE mailserver; \
-    INSERT INTO `virtual_domains`(`id` ,`name`) VALUES ('1', 'w15.ephec-ti.be'); \
-    INSERT INTO `virtual_users`(`id`, `domain_id`, `password` , `email`) VALUES ('1', '1', ENCRYPT('password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'l.lemaire@w15.ephec-ti.be'),('2', '1', ENCRYPT('admin_password', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16))), 'admin@w15.ephec-ti.be'); \
-	INSERT INTO `virtual_aliases`(`id`, `domain_id`, `source`, `destination`) VALUES ('1', '1', 'contact@w15.ephec-ti.be', 'l.lemaire@w15.ephec-ti.be');"
+RUN service mysql start 
 
 EXPOSE 995
 EXPOSE 993
