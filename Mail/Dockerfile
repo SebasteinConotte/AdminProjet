@@ -49,10 +49,10 @@ ENV DOMAIN ""
 ENV USERNAME ""
 ENV PASSWORD ""
 
-# Volumes for configuration
-VOLUME /var/spool/mail/vhosts
 
-RUN chmod +x /var/spool/mail/vhosts
+
+RUN chmod +x /var/spool/mail/vhosts/
+RUN chmod +x /var/spool/mail/vhosts/*
 
 # Expose volumes
 EXPOSE 25
