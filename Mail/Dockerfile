@@ -13,8 +13,6 @@ RUN apt-get update && \
   apt-get upgrade -y && \
   apt-get install -y postfix \
     postfix-mysql \
-    mysql-client \
-    mysql-server \
 	rsyslog \
 	dovecot-lmtpd \
 	dovecot-pop3d \
@@ -31,7 +29,8 @@ RUN apt-get update && \
     supervisor \
 	opendkim \
 	opendkim-tools \
-	libopendbx1-mysql
+	libopendbx1-mysql \
+	mariadb-server
 
 RUN sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY cfg/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
