@@ -52,6 +52,8 @@ ENV PASSWORD ""
 # Volumes for configuration
 VOLUME /var/spool/mail/vhosts
 
+RUN chmod +x /var/spool/mail/vhosts
+
 # Expose volumes
 EXPOSE 25
 EXPOSE 143
