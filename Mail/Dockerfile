@@ -61,7 +61,7 @@ COPY config/etc/        /etc/
 
 
 COPY scripts/* /usr/local/bin/
-ENTRYPOINT [ "entrypoint.sh" ]
+ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
 
 
 
