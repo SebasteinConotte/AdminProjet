@@ -11,13 +11,7 @@ MAIL_DKIM=/etc/opendkim
 MAIL_DKIM_SELECTOR=${MAIL_DKIM_SELECTOR:-`date +%s | sha256sum | base64 | head -c 8`}
 MAIL_DKIM_KEY=${MAIL_DKIM_KEY:-$MAIL_DKIM/privkey.pem}
 
-# Checks
-if [[ ! -f $MAIL_CERT || ! -f $MAIL_KEY ]]; then
-    echo -e "ERROR: Invalid TLS configuration, please make sure these files exists:"
-    echo -e "\t$MAIL_CERT (certificate)"
-    echo -e "\t$MAIL_KEY (private key)"
-    exit 1
-fi
+
 
 if [[ ! -d $MAIL_VMAIL ]]; then
     echo -e "WARNING: Mail directory is not mapped."
