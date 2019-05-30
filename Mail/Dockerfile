@@ -61,6 +61,7 @@ COPY config/etc/        /etc/
 
 
 COPY scripts/* /usr/local/bin/
+RUN chmod +x /usr/local/bin/*
 ENTRYPOINT [ "/usr/local/bin/entrypoint.sh" ]
 
 
