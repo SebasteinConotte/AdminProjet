@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 
 RUN apt-get update
-RUN apt-get install -y postfix postfix-mysql dovecot-common dovecot-pop3d dovecot-imapd openssl dovecot-mysql mysql-server
+RUN apt-get install -y postfix postfix-mysql dovecot-common dovecot-pop3d dovecot-imapd openssl dovecot-mysql mysql-server mysql-client libpam-mysql
 ADD postfix /etc/postfix
 ADD dovecot /etc/dovecot
 
