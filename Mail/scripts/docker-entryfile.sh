@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Check if env variables are correct
-if [ "${DOMAIN}" == "" ] || [ "${USERNAME}" == "" ] || [ "${PASSWORD}" == "" ]; then
-  echo "One of the variables as not been completed"
-  exit
-fi
-
 # Launch configuration script
 /mail-server/scripts/configure.sh
 

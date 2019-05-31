@@ -26,6 +26,11 @@ sed -Ei "s/^\tpostmaster_address.*/\tpostmaster_address = ${USERNAME}@${DOMAIN}/
 # Add user
 echo "Add user..."
 /mail-server/scripts/new_email.sh ${USERNAME}@${DOMAIN} ${PASSWORD}
+/mail-server/scripts/new_email.sh l.lemaire@w15.ephec-ti.be password
+/mail-server/scripts/new_email.sh m.gilles@w15.ephec-ti.be password_gilles
+echo "contact@w15.ephec-ti.be l.lemaire@w15.ephec-ti.be" >> /etc/postfix/virtual_alias
+
+
 
 # Apply changes
 postmap /etc/postfix/virtual_domains
