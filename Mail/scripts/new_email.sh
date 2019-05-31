@@ -17,7 +17,7 @@ if [ -f /etc/postfix/virtual_mailbox ]
 then
   echo "Adding Postfix user configuration..."
   echo $ADDRESS $DOMAIN/$USERNAME/ >> /etc/postfix/virtual_mailbox
-  echo @$DOMAIN $USERNAME@$DOMAIN >> /etc/postfix/virtual_alias
+  #echo @$DOMAIN $USERNAME@$DOMAIN >> /etc/postfix/virtual_alias
 
   if [ $? -eq 0 ]
   then
