@@ -4,6 +4,7 @@ $username = "admin";
 $password = "0I47Q(bxRIUC";
 $bdd = new PDO('mysql:host=51.77.203.87;dbname=db_ephec;charset=utf8', $username, $password);
 $localite = $_POST['cat'];
+$bdd->exec('INSERT INTO CLIENT(NCLI, NOM, ADRESSE, LOCALITE, CAT, COMPTE)VALUES($_POST["ncli"],$_POST["nom"],$_POST["adresse"],$_POST["localite"],NULL,NULL)');
 $reponse = $bdd->prepare('SELECT * FROM CLIENT WHERE LOCALITE = ?');
 $reponse->execute(array($localite));
 $listeNom = '<style>table, td, tr {border: 1px solid black;border-collapse: collapse;padding: 15px;}</style><table><tr><th>NCLI</th><th>NOM</th><th>ADRESSE</th><th>LOCALITE</th></tr>';
@@ -12,18 +13,3 @@ while ($donnees = $reponse->fetch()) {
 }
 $listeNom .= '</table>';
 echo $listeNom;
-?>
-<form action="action2.php" method="post">
-    <p>
-        INSERTION nouvelles données :<br>
-        <label for="ncli">NCLI:</label>
-        <input id="ncli" name="ncli" type="text" required><br>
-        <label for="nom">Nom</label>
-        <input id="nom" name="nom" type="text" required>
-        <label for="adresse">Adresse</label>
-        <input id="adresse" name="adresse" type="text" required>
-        <label for="localite">Mot de passe</label>
-        <input id="localite" name="localite" type="text" required>
-    </p>
-    <p><input type="submit" value="OK"></p>
-</form>
