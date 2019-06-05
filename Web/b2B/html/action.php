@@ -13,6 +13,9 @@ while ($donnees = $reponse->fetch()) {
 $listeNom .= '</table>';
 echo $listeNom;
 ?>
+<html>
+<head></head>
+<body>
 <form action="action2.php" method="post">
     <p>
         INSERTION nouvelles données :<br>
@@ -27,3 +30,5 @@ echo $listeNom;
     </p>
     <p><input type="submit" value="OK"></p>
 </form>
+</body>
+</html>
