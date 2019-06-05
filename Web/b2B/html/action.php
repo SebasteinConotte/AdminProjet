@@ -20,19 +20,6 @@ $listeNom .= '</table>';
 </head>
 <body>
 <?= $listeNom ?>
-<form action="action2.php" method="post">
-    <p>
-        INSERTION nouvelles données :<br>
-        <label for="ncli">NCLI:</label>
-        <input id="ncli" name="ncli" type="text" required><br>
-        <label for="nom">Nom</label>
-        <input id="nom" name="nom" type="text" required>
-        <label for="adresse">Adresse</label>
-        <input id="adresse" name="adresse" type="text" required>
-        <label for="localite">Mot de passe</label>
-        <input id="localite" name="localite" type="text" required>
-    </p>
-    <p><input type="submit" value="OK"></p>
-</form>
+
 </body>
 </html>
