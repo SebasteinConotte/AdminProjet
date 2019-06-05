@@ -29,11 +29,11 @@ while ($donnees = $reponse->fetch()) {
         <label for="ncli">NCLI:</label>
         <input id="ncli" name="ncli" type="text" required><br>
         <label for="nom">Nom</label>
-        <input id="nom" name="nom" type="text" required>
+        <input id="nom" name="nom" type="text" required><br>
         <label for="adresse">Adresse</label>
-        <input id="adresse" name="adresse" type="text" required>
-        <label for="localite">Mot de passe</label>
-        <input id="localite" name="localite" type="text" required>
+        <input id="adresse" name="adresse" type="text" required><br>
+        <label for="localite">Localite</label>
+        <input id="localite" name="localite" type="text" required><br>
     </p>
     <p><input type="submit" value="insérer"></p>
 </form>
