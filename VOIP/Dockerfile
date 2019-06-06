@@ -27,14 +27,14 @@ ADD  https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/
 ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/config/features.conf /etc/asterisk/features.conf
 ADD https://raw.githubusercontent.com/SebasteinConotte/AdminProjet/master/VOIP/config/asterisk /etc/logrotate.d/asterisk
 
-<<<<<<< HEAD
 
 
 
-=======
+
+
 RUN sed -i "s/rtpstart=10000/rtpstart=16384/g" /etc/asterisk/rtp.conf
 RUN sed -i "s/rtpend=20000/rtpend=16394/g" /etc/asterisk/rtp.conf
->>>>>>> master
+
 RUN logrotate /etc/logrotate.conf
 
 EXPOSE 5060 5060/udp
